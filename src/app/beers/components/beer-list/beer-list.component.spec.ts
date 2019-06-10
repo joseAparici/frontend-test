@@ -1,8 +1,8 @@
 import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
-import { BeerListComponent } from './beer-list.component';
-import { Store, StoreModule } from '@ngrx/store';
-import { DrinksState } from '../../store';
+import {BeerListComponent} from './beer-list.component';
+import {Store, StoreModule} from '@ngrx/store';
+import {DrinksState} from '../../store';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Router} from '@angular/router';
 import {nextBeersPageRequest} from '../../store/actions/beers.actions';

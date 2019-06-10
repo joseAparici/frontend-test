@@ -1,5 +1,5 @@
-import { Routes } from '@angular/router';
-import { BeerListComponent } from './components/beer-list/beer-list.component';
+import {Routes} from '@angular/router';
+import {BeerListComponent} from './components/beer-list/beer-list.component';
 import {APP_CONSTANTS} from '../app.config';
 
 

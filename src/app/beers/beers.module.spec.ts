@@ -1,4 +1,4 @@
-import { BeersModule } from './beers.module';
+import {BeersModule} from './beers.module';
 
 describe('BeersModule', () => {
   let beersModule: BeersModule;

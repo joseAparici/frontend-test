@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BeerDetailComponent } from './beer-detail.component';
+import {BeerDetailComponent} from './beer-detail.component';
 import {BEER_MODULE_CONFIG, BEER_MODULE_CONSTANTS} from '../../beer.module.config';
 import {APP_CONSTANTS, APP_MODULE_CONFIG} from '../../../app.config';
 import {RouterTestingModule} from '@angular/router/testing';

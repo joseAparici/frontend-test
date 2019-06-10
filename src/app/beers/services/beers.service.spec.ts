@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {BeersService} from './beers.service';
 import {BEERS_MODULE_CONFIG, BEERS_MODULE_CONSTANTS, BeersModuleConfig} from '../beers.module.config';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';

@@ -1,7 +1,7 @@
-import { createSelector } from '@ngrx/store';
+import {createSelector} from '@ngrx/store';
 
-import { DrinksState, getDrinksState } from '../index';
-import { BeersState } from '../state/beers.state-type';
+import {DrinksState, getDrinksState} from '../index';
+import {BeersState} from '../state/beers.state-type';
 
 
 export const getBeers = (state: BeersState) => state.beers;
