@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DrinkState} from '../../store';
 import {BEER_MODULE_CONFIG, BeerModuleConfig} from '../../beer.module.config';
 import {APP_MODULE_CONFIG, AppModuleConfig} from '../../../app.config';
+import {BeerService} from '../../services/beer.service';
 
 @Component({
   selector: 'app-beer-detail',
@@ -20,6 +21,7 @@ export class BeerDetailComponent implements OnInit {
 
   constructor(@Inject(APP_MODULE_CONFIG) private appModuleConfig: AppModuleConfig,
               @Inject(BEER_MODULE_CONFIG) private beerModuleConfig: BeerModuleConfig,
+              private beerService: BeerService,
               private store: Store<DrinkState>,
               private route: ActivatedRoute,
               private router: Router) {
@@ -36,7 +38,7 @@ export class BeerDetailComponent implements OnInit {
   }
 
   calculateGravityDifference(original_gravity, final_gravity) {
-    this.gravityDifference = original_gravity - final_gravity;
+    this.gravityDifference = this.beerService.calculateDifference(original_gravity, final_gravity);
   }
 }
 

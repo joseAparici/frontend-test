@@ -1,4 +1,4 @@
-import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {BeerListComponent} from './beer-list.component';
 import {Store, StoreModule} from '@ngrx/store';
@@ -6,13 +6,12 @@ import {DrinksState} from '../../store';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Router} from '@angular/router';
 import {nextBeersPageRequest} from '../../store/actions/beers.actions';
-import {of} from 'rxjs';
 import {Pagination} from '../../store/state/beers.state-type';
 import {BEERS_MODULE_CONSTANTS} from '../../beers.module.config';
-import any = jasmine.any;
+import {of} from 'rxjs';
 
 
-xdescribe('BeerListComponent', () => {
+describe('BeerListComponent', () => {
   let component: BeerListComponent;
   let fixture: ComponentFixture<BeerListComponent>;
   let store: Store<DrinksState>;
@@ -48,7 +47,7 @@ xdescribe('BeerListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(BeerListComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    store = TestBed.get(Store);
   });
 
   it('should create', () => {
@@ -56,12 +55,10 @@ xdescribe('BeerListComponent', () => {
   });
 
   describe('ngOnInit', () => {
-    it('should fetch data and initialize beers list', fakeAsync(() => {
+    it('should fetch data and initialize beers list', () => {
       component.ngOnInit();
-      tick();
-      expect(spies.store.dispatch).toHaveBeenCalled();
       expect(component.beers$).toBeDefined();
-    }));
+    });
   });
 
   describe('go to detail', () => {
@@ -93,10 +90,8 @@ xdescribe('BeerListComponent', () => {
   function initSpies() {
     spies = {
       store: {
-        dispatch: spyOn(store, 'dispatch').and.callFake((params) => {
-          return of(any);
-        }),
-        pipe: spyOn(store, 'pipe').and.returnValue(of(mocks.pagination))
+        pipe: spyOn(store, 'pipe').and.callFake(() => of([])),
+        dispatch: spyOn(store, 'dispatch').and.callThrough()
       },
       router: {
         navigate: spyOn(router, 'navigate')

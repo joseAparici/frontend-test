@@ -48,9 +48,19 @@ describe('BeerService', () => {
       expect(httpMock.open[0].request.url).toBe(beerModuleConfig.ENDPOINT.BEER.GET.URL);
     });
   });
+
+  describe('calculateDifference', () => {
+    it('should return the difference between original and final gravity', () => {
+      const result = beerService.calculateDifference(mocks.original_gravity, mocks.final_gravity);
+      expect(result).toBe(mocks.original_gravity - mocks.final_gravity);
+    });
+  });
+
   function loadMocks() {
     mocks = {
-      beerId: 'beerId'
+      beerId: 'beerId',
+      original_gravity: 10,
+      final_gravity: 1
     };
   }
 

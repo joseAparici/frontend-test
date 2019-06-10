@@ -19,4 +19,8 @@ export class BeerService {
   private _addBeerIdToUrl(url: string, beerId: number) {
     return url.replace(this.beerModuleConfig.ENDPOINT.BEER.GET.PATH_PARAMS.BEER_ID, beerId.toString());
   }
+
+  calculateDifference(original_gravity, final_gravity) {
+    return original_gravity - final_gravity;
+  }
 }
