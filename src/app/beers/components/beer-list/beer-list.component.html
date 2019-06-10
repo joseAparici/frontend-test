@@ -1,8 +1,9 @@
 <div class="beerContainer"
      infiniteScroll
      (scrolled)="onScroll()">
-  <div class="beer"
-       *ngFor="let beer of (beers$ | async)">
+  <div
+    class="beer"
+    *ngFor="let beer of beers">
     <h4>
       {{beer.name}}
     </h4>

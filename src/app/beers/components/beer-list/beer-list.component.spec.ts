@@ -1,21 +1,15 @@
-import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
-
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import { BeerListComponent } from './beer-list.component';
-import { Store, StoreModule } from '@ngrx/store';
-import { DrinksState } from '../../store';
+import {BeersService} from '../../services/beers.service';
+import {BeersServiceMock} from '../../services/beers.service.mock';
+import {BeersRemoteMock} from '../../services/beers.remote.mock';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Router} from '@angular/router';
-import {nextBeersPageRequest} from '../../store/actions/beers.actions';
-import {of} from 'rxjs';
-import {Pagination} from '../../store/state/beers.state-type';
-import {BEERS_MODULE_CONSTANTS} from '../../beers.module.config';
-import any = jasmine.any;
 
-
-xdescribe('BeerListComponent', () => {
+describe('BeerListComponent', () => {
   let component: BeerListComponent;
   let fixture: ComponentFixture<BeerListComponent>;
-  let store: Store<DrinksState>;
+  let beersService: BeersService;
   let router: Router;
   let spies: any;
   let mocks: any;
@@ -23,20 +17,20 @@ xdescribe('BeerListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule,
-        StoreModule.forRoot({})
+        RouterTestingModule
       ],
       declarations: [
         BeerListComponent
       ],
       providers: [
-        Store
+        {provide: BeersService, useClass: BeersServiceMock}
       ]
-    });
+    })
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
+    beersService = TestBed.get(BeersService);
     router = TestBed.get(Router);
   });
 
@@ -55,13 +49,11 @@ xdescribe('BeerListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('ngOnInit', () => {
-    it('should fetch data and initialize beers list', fakeAsync(() => {
+  describe('on init', () => {
+    it('should call to currentBeers$', () => {
       component.ngOnInit();
-      tick();
-      expect(spies.store.dispatch).toHaveBeenCalled();
-      expect(component.beers$).toBeDefined();
-    }));
+      expect(spies.beersService.currentBeers$).toHaveBeenCalled();
+    });
   });
 
   describe('go to detail', () => {
@@ -74,29 +66,22 @@ xdescribe('BeerListComponent', () => {
   describe('on scroll', () => {
     it('should call to beers service getNextPage', () => {
       component.onScroll();
-      expect(spies.store.dispatch).toHaveBeenCalledWith(nextBeersPageRequest());
+      expect(spies.beersService.getNextPage).toHaveBeenCalled();
     });
   });
 
   function loadMocks() {
     mocks = {
-      beerId: 1,
-      pagination: <Pagination>{
-        pageNum: 1,
-        pageSize: BEERS_MODULE_CONSTANTS.ENDPOINT.BEERS.GET.DEFAULT_PAGE_SIZE,
-        currentItems: 0,
-        hasMoreItems: true
-      }
+      beers: BeersRemoteMock.mockData.beers,
+      beerId: 1
     };
   }
 
   function initSpies() {
     spies = {
-      store: {
-        dispatch: spyOn(store, 'dispatch').and.callFake((params) => {
-          return of(any);
-        }),
-        pipe: spyOn(store, 'pipe').and.returnValue(of(mocks.pagination))
+      beersService: {
+        currentBeers$: spyOn(beersService, 'currentBeers$').and.callThrough(),
+        getNextPage: spyOn(beersService, 'getNextPage').and.callThrough()
       },
       router: {
         navigate: spyOn(router, 'navigate')

@@ -1,7 +1,17 @@
+
 $height: 300px;
 
 
 :host {
+
+  .beerContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px;
+    justify-content: center;
+    align-items: center;
+  }
+
   .beerDetail {
     height: $height;
     margin: 15px;

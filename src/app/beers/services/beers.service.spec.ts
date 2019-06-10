@@ -1,23 +1,26 @@
 import { TestBed } from '@angular/core/testing';
-import {BeersService} from './beers.service';
+import { BeersService } from './beers.service';
+import {BeersRemote} from './beers.remote';
+import {BeersState} from './beers-state';
 import {BEERS_MODULE_CONFIG, BEERS_MODULE_CONSTANTS, BeersModuleConfig} from '../beers.module.config';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {BeersRemoteMock} from './beers.remote.mock';
 import {Observable} from 'rxjs';
-import {Pagination} from '../store/state/beers.state-type';
+import {BeersPagination} from '../model/beers-pagination';
 
 describe('BeersService', () => {
   let beersService: BeersService;
+  let beersRemote: BeersRemote;
+  let beersState: BeersState;
   let beersModuleConfig: BeersModuleConfig;
-  let httpMock: any;
+  let spies: any;
   let mocks: any;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule
-      ],
       providers: [
         BeersService,
+        {provide: BeersRemote, useClass: BeersRemoteMock},
+        BeersState,
         {provide: BEERS_MODULE_CONFIG, useValue: BEERS_MODULE_CONSTANTS}
       ]
     });
@@ -25,44 +28,93 @@ describe('BeersService', () => {
 
   beforeEach(() => {
     beersService = TestBed.get(BeersService);
+    beersRemote = TestBed.get(BeersRemote);
+    beersState = TestBed.get(BeersState);
     beersModuleConfig = TestBed.get(BEERS_MODULE_CONFIG);
-    httpMock = TestBed.get(HttpTestingController);
   });
 
   beforeEach(() => {
     loadMocks();
+    initSpies();
   });
 
   it('should be created', () => {
     expect(beersService).toBeTruthy();
   });
 
-  describe('get beers', () => {
-    it('should return and observable', () => {
-      const result = beersService.getBeers(mocks.beersPagination);
-      expect(result instanceof Observable).toBe(true);
+  describe('load beers', () => {
+    it('should call to remote if state is empty', () => {
+      beersService.loadBeers();
+      expect(beersRemote.retrieveBeers).toHaveBeenCalled();
     });
 
-    it('should get beers by doing an http request with beers pagination', () => {
-      beersService.getBeers(mocks.beersPagination).subscribe();
-      expect(httpMock.open[0].request.method).toBe('GET');
-      expect(httpMock.open[0].request.url).toBe(beersModuleConfig.ENDPOINT.BEERS.GET.URL);
-      expect(httpMock.open[0].request.params.get(beersModuleConfig.ENDPOINT.BEERS.GET.QUERY_PARAMS.PAGE_NUMBER))
-        .toBe(mocks.beersPagination.pageNum.toString());
-      expect(httpMock.open[0].request.params.get(beersModuleConfig.ENDPOINT.BEERS.GET.QUERY_PARAMS.PAGE_SIZE))
-        .toBe(mocks.beersPagination.pageSize.toString());
+    it('should not call to remote if state is not empty', () => {
+      beersState.beers = mocks.beers;
+      beersService.loadBeers();
+      expect(beersRemote.retrieveBeers).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('load beer', () => {
+    it('should call to remote if beer does not exists on state', () => {
+      beersState.beers = [];
+      beersService.loadBeer(mocks.beerId);
+      expect(beersRemote.retrieveBeer).toHaveBeenCalled();
+    });
+
+    it('should not call to remote if beer exists on state', () => {
+      beersState.beers = mocks.beers;
+      beersService.loadBeer(mocks.beerId);
+      expect(beersRemote.retrieveBeer).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('current beers$', () => {
+    it('should return and observable', () => {
+      const result = beersService.currentBeers$();
+      expect(result instanceof Observable).toBe(true);
+    });
+  });
+
+  describe('current beer$', () => {
+    it('should return and observable', () => {
+      const result = beersService.currentBeer$();
+      expect(result instanceof Observable).toBe(true);
+    });
+  });
+
+  describe('get next page', () => {
+    it('should call to remote', () => {
+      beersState.currentPagination = mocks.beersPagination;
+      beersService.getNextPage();
+      expect(spies.beersRemote.retrieveBeers).toHaveBeenCalledWith(mocks.beersPagination);
+    });
+  });
+
+  describe('calculateGravityDifference', () => {
+    it('should return the difference between original and final gravity', () => {
+      const result = beersService.calculateGravityDifference(mocks.original_gravity, mocks.final_gravity);
+      expect(result).toBe(mocks.original_gravity - mocks.final_gravity);
     });
   });
 
   function loadMocks() {
     mocks = {
-      beersPagination: <Pagination>{
-        pageNum: 1,
-        pageSize: BEERS_MODULE_CONSTANTS.ENDPOINT.BEERS.GET.DEFAULT_PAGE_SIZE,
-        currentItems: 0,
-        hasMoreItems: true
-      },
-      beerId: 'beerId'
+      beers: BeersRemoteMock.mockData.beers,
+      beerId: 1,
+      beersPagination: new BeersPagination(1, beersModuleConfig.ENDPOINT.BEERS.GET.DEFAULT_PAGE_SIZE * 2),
+      original_gravity: 10,
+      final_gravity: 1
+    };
+  }
+
+  function initSpies() {
+    spies = {
+      beersRemote: {
+        retrieveBeers: spyOn(beersRemote, 'retrieveBeers').and.callThrough(),
+        retrieveBeer: spyOn(beersRemote, 'retrieveBeer').and.callThrough(),
+      }
+
     };
   }
 });

@@ -1,4 +1,4 @@
-<div *ngIf="beer$ |async as beer"
+<div
   class="beerDetail">
   <button (click)="goBack()">Go back</button>
   <h4>{{beer.name}}</h4>
@@ -15,7 +15,7 @@
   <p>Ibu: {{beer.ibu}}</p>
   <p>Contributed by: {{beer.contributed_by}}</p>
   <div>
-    <button (click)="calculateGravityDifference(beer.target_og, beer.target_fg)">Calculate difference</button>
+    <button (click)="calculateDifference()">Calculate difference</button>
     <span *ngIf="gravityDifference">Gravity difference: {{gravityDifference}}</span>
   </div>
 </div>

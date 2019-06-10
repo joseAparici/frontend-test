@@ -1,11 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {select, Store} from '@ngrx/store';
-import {DrinksState} from '../../store';
-import {Observable, Subscription} from 'rxjs';
-import {getBeersPagination, getBeersSelector} from '../../store/selectors/beers.selectors';
-import {fetchBeersListRequest, nextBeersPageRequest} from '../../store/actions/beers.actions';
+import {Subscription} from 'rxjs';
+import {BeersService} from '../../services/beers.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Pagination} from '../../store/state/beers.state-type';
 
 @Component({
   selector: 'app-beer-list',
@@ -14,24 +10,19 @@ import {Pagination} from '../../store/state/beers.state-type';
 })
 export class BeerListComponent implements OnInit, OnDestroy {
 
-  public beers$: Observable<any>;
+  beers: Array<any> = [];
   private subscription = new Subscription();
 
-  constructor(private store: Store<DrinksState>,
+  constructor(private beersService: BeersService,
               private router: Router,
-              private route: ActivatedRoute) {
-  }
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.subscription.add(
-      this.store.pipe(select(getBeersPagination)).subscribe((pagination: Pagination) => {
-        if (pagination.hasMoreItems && pagination.pageNum * pagination.pageSize > pagination.currentItems) {
-          this.store.dispatch(fetchBeersListRequest(pagination));
-        }
+      this.beersService.currentBeers$().subscribe((beers: any) => {
+        this.beers = beers;
       })
     );
-
-    this.beers$ = this.store.pipe(select(getBeersSelector));
   }
 
   goToDetail(beerId: number) {
@@ -39,7 +30,7 @@ export class BeerListComponent implements OnInit, OnDestroy {
   }
 
   onScroll() {
-    this.store.dispatch(nextBeersPageRequest());
+    this.beersService.getNextPage();
   }
 
   ngOnDestroy(): void {
