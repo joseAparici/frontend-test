@@ -1,0 +1,15 @@
+<div class="beerContainer"
+     infiniteScroll
+     (scrolled)="onScroll()">
+  <div class="beer"
+       *ngFor="let beer of (beers$ | async)">
+    <h4>
+      {{beer.name}}
+    </h4>
+    <p>
+      {{beer.tagline}}
+    </p>
+    <img src="{{beer.image_url}}">
+    <button (click)="goToDetail(beer.id)">Go to detail</button>
+  </div>
+</div>

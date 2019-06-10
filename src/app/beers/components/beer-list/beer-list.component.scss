@@ -1,0 +1,40 @@
+$width: 200px;
+$height: 300px;
+
+:host {
+
+  .beerContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .beer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: $width;
+    height: $height;
+    margin: 15px;
+
+    h4 {
+      margin-bottom: 0;
+    }
+
+    h4, p {
+      text-align: center;
+    }
+
+    img {
+      height: 50%;
+    }
+  }
+
+  @media screen and (min-width: 1420px) {
+    max-width: 70%;
+    margin: 50px auto;
+  }
+}

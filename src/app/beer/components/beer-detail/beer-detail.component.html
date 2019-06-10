@@ -1,0 +1,21 @@
+<div *ngIf="beer$ |async as beer"
+  class="beerDetail">
+  <button (click)="goBack()">Go back</button>
+  <h4>{{beer.name}}</h4>
+  <p>{{beer.description}}</p>
+  <p>First brewed: {{beer.first_brewed}}</p>
+  <img src="{{beer.image_url}}">
+  <h2>Food pairing:</h2>
+  <ul>
+    <li *ngFor="let food of beer.food_pairing">
+      {{ food }}
+    </li>
+  </ul>
+  <p>Abv: {{beer.abv}}</p>
+  <p>Ibu: {{beer.ibu}}</p>
+  <p>Contributed by: {{beer.contributed_by}}</p>
+  <div>
+    <button (click)="calculateGravityDifference(beer.target_og, beer.target_fg)">Calculate difference</button>
+    <span *ngIf="gravityDifference">Gravity difference: {{gravityDifference}}</span>
+  </div>
+</div>
