@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {BeerDetailComponent} from './beer-detail.component';
-import {BEER_MODULE_CONFIG, BEER_MODULE_CONSTANTS} from '../../beer.module.config';
+import {BEER_DETAIL_MODULE_CONFIG, BEER_DETAIL_MODULE_CONSTANTS} from '../../beer-detail.module.config';
 import {APP_CONSTANTS, APP_MODULE_CONFIG, AppModuleConfig} from '../../../app.config';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Store, StoreModule} from '@ngrx/store';
@@ -10,15 +10,15 @@ import {DrinkState} from '../../store';
 import {Pagination} from '../../../beers/store/state/beers.state-type';
 import {BEERS_MODULE_CONSTANTS} from '../../../beers/beers.module.config';
 import {of} from 'rxjs';
-import {BeerService} from '../../services/beer.service';
-import {BeerServiceMock} from '../../services/beer.service.mock';
+import {BeerDetailService} from '../../services/beer-detail.service';
+import {BeerDetailServiceMock} from '../../services/beer-detail.service.mock';
 import any = jasmine.any;
 
 describe('BeerDetailComponent', () => {
   let component: BeerDetailComponent;
   let fixture: ComponentFixture<BeerDetailComponent>;
   let appModuleConfig: AppModuleConfig;
-  let beerService: BeerService;
+  let beerService: BeerDetailService;
   let store: Store<DrinkState>;
   let router: Router;
   let spies: any;
@@ -33,9 +33,9 @@ describe('BeerDetailComponent', () => {
       declarations: [ BeerDetailComponent ],
       providers: [
         Store,
-        {provide: BeerService, useClass: BeerServiceMock},
+        {provide: BeerDetailService, useClass: BeerDetailServiceMock},
         {provide: APP_MODULE_CONFIG, useValue: APP_CONSTANTS},
-        {provide: BEER_MODULE_CONFIG, useValue: BEER_MODULE_CONSTANTS}
+        {provide: BEER_DETAIL_MODULE_CONFIG, useValue: BEER_DETAIL_MODULE_CONSTANTS}
       ]
     })
     .compileComponents();
@@ -45,7 +45,7 @@ describe('BeerDetailComponent', () => {
     store = TestBed.get(Store);
     router = TestBed.get(Router);
     appModuleConfig = TestBed.get(APP_MODULE_CONFIG);
-    beerService = TestBed.get(BeerService);
+    beerService = TestBed.get(BeerDetailService);
   });
 
   beforeEach(() => {

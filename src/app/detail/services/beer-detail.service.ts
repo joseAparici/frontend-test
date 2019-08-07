@@ -1,23 +1,23 @@
 import {Inject, Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {BEER_MODULE_CONFIG, BeerModuleConfig} from '../beer.module.config';
+import {BEER_DETAIL_MODULE_CONFIG, BeerDetailModuleConfig} from '../beer-detail.module.config';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BeerService {
+export class BeerDetailService {
 
-  constructor(@Inject(BEER_MODULE_CONFIG) private beerModuleConfig: BeerModuleConfig,
+  constructor(@Inject(BEER_DETAIL_MODULE_CONFIG) private beerDetailModuleConfig: BeerDetailModuleConfig,
               private http: HttpClient) { }
 
   public getBeer(beerId): Observable<any> {
-    const url = this._addBeerIdToUrl(this.beerModuleConfig.ENDPOINT.BEER.GET.URL, beerId);
+    const url = this._addBeerIdToUrl(this.beerDetailModuleConfig.ENDPOINT.BEER.GET.URL, beerId);
     return this.http.get(url);
   }
 
   private _addBeerIdToUrl(url: string, beerId: number) {
-    return url.replace(this.beerModuleConfig.ENDPOINT.BEER.GET.PATH_PARAMS.BEER_ID, beerId.toString());
+    return url.replace(this.beerDetailModuleConfig.ENDPOINT.BEER.GET.PATH_PARAMS.BEER_ID, beerId.toString());
   }
 
   calculateDifference(original_gravity, final_gravity) {

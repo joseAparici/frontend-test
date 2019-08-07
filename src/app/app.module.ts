@@ -7,7 +7,7 @@ import {AppRoutes} from './app.routing';
 import {BeersModule} from './beers/beers.module';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
-import {BeerModule} from './beer/beer.module';
+import {BeerDetailModule} from './detail/beer-detail.module';
 import {APP_CONSTANTS, APP_MODULE_CONFIG} from './app.config';
 
 
@@ -21,7 +21,7 @@ import {APP_CONSTANTS, APP_MODULE_CONFIG} from './app.config';
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     BeersModule,
-    BeerModule
+    BeerDetailModule
   ],
   providers: [
     {provide: APP_MODULE_CONFIG, useValue: APP_CONSTANTS}

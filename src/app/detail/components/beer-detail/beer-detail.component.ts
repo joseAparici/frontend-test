@@ -5,9 +5,9 @@ import {Observable} from 'rxjs';
 import {getBeerSelector} from '../../store/selector/beer.selector';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DrinkState} from '../../store';
-import {BEER_MODULE_CONFIG, BeerModuleConfig} from '../../beer.module.config';
+import {BEER_DETAIL_MODULE_CONFIG, BeerDetailModuleConfig} from '../../beer-detail.module.config';
 import {APP_MODULE_CONFIG, AppModuleConfig} from '../../../app.config';
-import {BeerService} from '../../services/beer.service';
+import {BeerDetailService} from '../../services/beer-detail.service';
 
 @Component({
   selector: 'app-beer-detail',
@@ -20,8 +20,8 @@ export class BeerDetailComponent implements OnInit {
   public gravityDifference;
 
   constructor(@Inject(APP_MODULE_CONFIG) private appModuleConfig: AppModuleConfig,
-              @Inject(BEER_MODULE_CONFIG) private beerModuleConfig: BeerModuleConfig,
-              private beerService: BeerService,
+              @Inject(BEER_DETAIL_MODULE_CONFIG) private beerModuleConfig: BeerDetailModuleConfig,
+              private beerService: BeerDetailService,
               private store: Store<DrinkState>,
               private route: ActivatedRoute,
               private router: Router) {

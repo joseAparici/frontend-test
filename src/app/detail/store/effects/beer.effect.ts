@@ -5,14 +5,14 @@ import {catchError, map, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {FETCH_BEER_REQUEST, fetchBeerFailed, fetchBeerResponse} from '../actions/beer.action';
 import {GenericAction} from '../../../models';
-import {BeerService} from '../../services/beer.service';
+import {BeerDetailService} from '../../services/beer-detail.service';
 
 
 @Injectable()
 export class BeerEffects {
 
   constructor(private actions$: Actions,
-              private beerService: BeerService) {
+              private beerService: BeerDetailService) {
   }
 
   @Effect() fetchBeer = this.actions$

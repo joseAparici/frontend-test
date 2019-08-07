@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
-import {BeerRouting} from './beer.routing';
-import {BeerService} from './services/beer.service';
+import {BeerDetailRouting} from './beer-detail.routing';
+import {BeerDetailService} from './services/beer-detail.service';
 import {HttpClientModule} from '@angular/common/http';
-import {BEER_MODULE_CONFIG, BEER_MODULE_CONSTANTS} from './beer.module.config';
+import {BEER_DETAIL_MODULE_CONFIG, BEER_DETAIL_MODULE_CONSTANTS} from './beer-detail.module.config';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {BeerEffects} from './store/effects/beer.effect';
@@ -15,7 +15,7 @@ import {beerReducers} from './store';
   imports: [
     CommonModule,
     HttpClientModule,
-    RouterModule.forChild(BeerRouting),
+    RouterModule.forChild(BeerDetailRouting),
     StoreModule.forFeature('drink', beerReducers),
     EffectsModule.forFeature([BeerEffects])
   ],
@@ -23,9 +23,9 @@ import {beerReducers} from './store';
     BeerDetailComponent
   ],
   providers: [
-    BeerService,
-    {provide: BEER_MODULE_CONFIG, useValue: BEER_MODULE_CONSTANTS}
+    BeerDetailService,
+    {provide: BEER_DETAIL_MODULE_CONFIG, useValue: BEER_DETAIL_MODULE_CONSTANTS}
 
   ]
 })
-export class BeerModule { }
+export class BeerDetailModule { }
