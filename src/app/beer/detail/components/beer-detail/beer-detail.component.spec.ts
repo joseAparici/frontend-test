@@ -1,15 +1,13 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {BeerDetailComponent} from './beer-detail.component';
-import {BEER_DETAIL_MODULE_CONFIG, BEER_DETAIL_MODULE_CONSTANTS} from '../../beer-detail.module.config';
+import {
+  BEER_DETAIL_MODULE_CONFIG,
+  BEER_DETAIL_MODULE_CONSTANTS
+} from '../../beer-detail.module.config';
 import {APP_CONSTANTS, APP_MODULE_CONFIG, AppModuleConfig} from '../../../../app.config';
 import {RouterTestingModule} from '@angular/router/testing';
-import {Store, StoreModule} from '@ngrx/store';
-import {Router} from '@angular/router';
-import {DrinkState} from '../../store';
-import {Pagination} from '../../../list/store/state/beers.state-type';
-import {BEER_LIST_MODULE_CONSTANTS} from '../../../list/beer-list.module.config';
-import {of} from 'rxjs';
+import {ActivatedRoute, Router} from '@angular/router';
 import {BeerDetailService} from '../../services/beer-detail.service';
 import {BeerDetailServiceMock} from '../../services/beer-detail.service.mock';
 import any = jasmine.any;
@@ -18,8 +16,7 @@ describe('BeerDetailComponent', () => {
   let component: BeerDetailComponent;
   let fixture: ComponentFixture<BeerDetailComponent>;
   let appModuleConfig: AppModuleConfig;
-  let beerService: BeerDetailService;
-  let store: Store<DrinkState>;
+  let beerDetailService: BeerDetailService;
   let router: Router;
   let spies: any;
   let mocks: any;
@@ -27,25 +24,30 @@ describe('BeerDetailComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule,
-        StoreModule.forRoot({})
+        RouterTestingModule.withRoutes([])
       ],
       declarations: [ BeerDetailComponent ],
       providers: [
-        Store,
         {provide: BeerDetailService, useClass: BeerDetailServiceMock},
         {provide: APP_MODULE_CONFIG, useValue: APP_CONSTANTS},
-        {provide: BEER_DETAIL_MODULE_CONFIG, useValue: BEER_DETAIL_MODULE_CONSTANTS}
+        {provide: BEER_DETAIL_MODULE_CONFIG, useValue: BEER_DETAIL_MODULE_CONSTANTS},
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              params: {'beerId': 1}
+            }
+          }
+        }
       ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
     router = TestBed.get(Router);
     appModuleConfig = TestBed.get(APP_MODULE_CONFIG);
-    beerService = TestBed.get(BeerDetailService);
+    beerDetailService = TestBed.get(BeerDetailService);
   });
 
   beforeEach(() => {
@@ -63,6 +65,13 @@ describe('BeerDetailComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  describe('on init', () => {
+    it('should call to beer service get beer method', () => {
+      component.ngOnInit();
+      expect(beerDetailService.getBeer).toHaveBeenCalledWith(mocks.beerId)
+    });
+  });
+
   describe('go back', () => {
     it('should navigate', () => {
       component.goBack();
@@ -73,7 +82,7 @@ describe('BeerDetailComponent', () => {
   describe('calculateGravityDifference', () => {
     it('should call to calculateDifference method service', () => {
       component.calculateGravityDifference(any, any);
-      expect(spies.beerService.calculateDifference).toHaveBeenCalled();
+      expect(spies.beerDetailService.calculateDifference).toHaveBeenCalled();
       expect(component.gravityDifference).toEqual(mocks.gravityDifference);
     });
   });
@@ -82,27 +91,18 @@ describe('BeerDetailComponent', () => {
   function loadMocks() {
     mocks = {
       beerId: 1,
-      pagination: <Pagination>{
-        pageNum: 1,
-        pageSize: BEER_LIST_MODULE_CONSTANTS.ENDPOINT.BEERS.GET.DEFAULT_PAGE_SIZE,
-        currentItems: 0,
-        hasMoreItems: true
-      },
       gravityDifference: 2
     };
   }
 
   function initSpies() {
     spies = {
-      store: {
-        pipe: spyOn(store, 'pipe').and.callFake(() => of([])),
-        dispatch: spyOn(store, 'dispatch').and.callThrough()
-      },
       router: {
         navigate: spyOn(router, 'navigate')
       },
-      beerService: {
-        calculateDifference: spyOn(beerService, 'calculateDifference').and.returnValue(mocks.gravityDifference)
+      beerDetailService: {
+        getBeer: spyOn(beerDetailService, 'getBeer').and.callThrough(),
+        calculateDifference: spyOn(beerDetailService, 'calculateDifference').and.returnValue(mocks.gravityDifference)
       }
     };
   }

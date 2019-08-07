@@ -1,5 +1,6 @@
 export class BeerDetailServiceMock {
 
-  calculateDifference() {
-  }
+  getBeer() {}
+
+  calculateDifference() {}
 }
