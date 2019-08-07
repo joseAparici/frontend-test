@@ -1,6 +1,6 @@
 import {Routes} from '@angular/router';
 import {BeerListComponent} from './components/beer-list/beer-list.component';
-import {APP_CONSTANTS} from '../app.config';
+import {APP_CONSTANTS} from '../../app.config';
 
 
 export const BeerListRouting: Routes = [

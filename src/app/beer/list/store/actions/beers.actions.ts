@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {GenericAction} from '../../../models';
+import {GenericAction} from '../../../../models';
 import {Pagination} from '../state/beers.state-type';
 
 

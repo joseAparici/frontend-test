@@ -1,5 +1,5 @@
 import {InjectionToken} from '@angular/core';
-import {APP_CONSTANTS} from '../app.config';
+import {APP_CONSTANTS} from '../../app.config';
 
 const PATH_PARAM_BEER_ID = 'beerId';
 

@@ -4,7 +4,7 @@ import {catchError, map, switchMap} from 'rxjs/operators';
 import {BeerListService} from '../../services/beer-list.service';
 import {FETCH_BEERS_REQUEST, fetchBeersListFailed, fetchBeersListResponse} from '../actions/beers.actions';
 import {of} from 'rxjs';
-import {GenericAction} from '../../../models';
+import {GenericAction} from '../../../../models';
 
 
 @Injectable()

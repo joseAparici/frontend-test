@@ -2,7 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {BeerDetailComponent} from './beer-detail.component';
 import {BEER_DETAIL_MODULE_CONFIG, BEER_DETAIL_MODULE_CONSTANTS} from '../../beer-detail.module.config';
-import {APP_CONSTANTS, APP_MODULE_CONFIG, AppModuleConfig} from '../../../app.config';
+import {APP_CONSTANTS, APP_MODULE_CONFIG, AppModuleConfig} from '../../../../app.config';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Store, StoreModule} from '@ngrx/store';
 import {Router} from '@angular/router';

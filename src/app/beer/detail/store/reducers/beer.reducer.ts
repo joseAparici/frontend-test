@@ -1,4 +1,4 @@
-import {GenericAction} from '../../../models';
+import {GenericAction} from '../../../../models';
 import {FETCH_BEER_RESPONSE} from '../actions/beer.action';
 import {BeerState} from '../state/beer.state-type';
 

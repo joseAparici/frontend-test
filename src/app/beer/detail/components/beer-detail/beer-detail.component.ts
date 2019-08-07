@@ -6,7 +6,7 @@ import {getBeerSelector} from '../../store/selector/beer.selector';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DrinkState} from '../../store';
 import {BEER_DETAIL_MODULE_CONFIG, BeerDetailModuleConfig} from '../../beer-detail.module.config';
-import {APP_MODULE_CONFIG, AppModuleConfig} from '../../../app.config';
+import {APP_MODULE_CONFIG, AppModuleConfig} from '../../../../app.config';
 import {BeerDetailService} from '../../services/beer-detail.service';
 
 @Component({

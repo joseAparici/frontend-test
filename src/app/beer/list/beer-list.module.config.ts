@@ -1,5 +1,5 @@
 import {InjectionToken} from '@angular/core';
-import {APP_CONSTANTS} from '../app.config';
+import {APP_CONSTANTS} from '../../app.config';
 
 export interface BeerListModuleConfig {
   ENDPOINT: any;

@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {GenericAction} from '../../../models';
+import {GenericAction} from '../../../../models';
 
 export const FETCH_BEER_REQUEST = '[Beer] fetch beer detail request';
 export const FETCH_BEER_RESPONSE = '[Beer] fetch beer detail response';

@@ -4,10 +4,10 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {RouterModule} from '@angular/router';
 import {AppRoutes} from './app.routing';
-import {BeerListModule} from './list/beer-list.module';
+import {BeerListModule} from './beer/list/beer-list.module';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
-import {BeerDetailModule} from './detail/beer-detail.module';
+import {BeerDetailModule} from './beer/detail/beer-detail.module';
 import {APP_CONSTANTS, APP_MODULE_CONFIG} from './app.config';
 
 

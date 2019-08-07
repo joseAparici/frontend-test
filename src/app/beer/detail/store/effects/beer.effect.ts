@@ -4,7 +4,7 @@ import {catchError, map, switchMap} from 'rxjs/operators';
 
 import {of} from 'rxjs';
 import {FETCH_BEER_REQUEST, fetchBeerFailed, fetchBeerResponse} from '../actions/beer.action';
-import {GenericAction} from '../../../models';
+import {GenericAction} from '../../../../models';
 import {BeerDetailService} from '../../services/beer-detail.service';
 
 

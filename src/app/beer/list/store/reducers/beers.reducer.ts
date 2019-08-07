@@ -1,6 +1,6 @@
 import {BeersState, Pagination} from '../state/beers.state-type';
 import {FETCH_BEERS_RESPONSE, NEXT_BEERS_PAGE_REQUEST} from '../actions/beers.actions';
-import {GenericAction} from '../../../models';
+import {GenericAction} from '../../../../models';
 import {BEER_LIST_MODULE_CONSTANTS} from '../../beer-list.module.config';
 
 
