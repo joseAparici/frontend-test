@@ -1,13 +1,13 @@
 import {TestBed} from '@angular/core/testing';
-import {BeersService} from './beers.service';
-import {BEERS_MODULE_CONFIG, BEERS_MODULE_CONSTANTS, BeersModuleConfig} from '../beers.module.config';
+import {BeerListService} from './beer-list.service';
+import {BEER_LIST_MODULE_CONFIG, BEER_LIST_MODULE_CONSTANTS, BeerListModuleConfig} from '../beer-list.module.config';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {Observable} from 'rxjs';
 import {Pagination} from '../store/state/beers.state-type';
 
-describe('BeersService', () => {
-  let beersService: BeersService;
-  let beersModuleConfig: BeersModuleConfig;
+describe('BeerListService', () => {
+  let beerListService: BeerListService;
+  let beerListModuleConfig: BeerListModuleConfig;
   let httpMock: any;
   let mocks: any;
 
@@ -17,15 +17,15 @@ describe('BeersService', () => {
         HttpClientTestingModule
       ],
       providers: [
-        BeersService,
-        {provide: BEERS_MODULE_CONFIG, useValue: BEERS_MODULE_CONSTANTS}
+        BeerListService,
+        {provide: BEER_LIST_MODULE_CONFIG, useValue: BEER_LIST_MODULE_CONSTANTS}
       ]
     });
   });
 
   beforeEach(() => {
-    beersService = TestBed.get(BeersService);
-    beersModuleConfig = TestBed.get(BEERS_MODULE_CONFIG);
+    beerListService = TestBed.get(BeerListService);
+    beerListModuleConfig = TestBed.get(BEER_LIST_MODULE_CONFIG);
     httpMock = TestBed.get(HttpTestingController);
   });
 
@@ -34,22 +34,22 @@ describe('BeersService', () => {
   });
 
   it('should be created', () => {
-    expect(beersService).toBeTruthy();
+    expect(beerListService).toBeTruthy();
   });
 
   describe('get beers', () => {
     it('should return and observable', () => {
-      const result = beersService.getBeers(mocks.beersPagination);
+      const result = beerListService.getBeers(mocks.beersPagination);
       expect(result instanceof Observable).toBe(true);
     });
 
     it('should get beers by doing an http request with beers pagination', () => {
-      beersService.getBeers(mocks.beersPagination).subscribe();
+      beerListService.getBeers(mocks.beersPagination).subscribe();
       expect(httpMock.open[0].request.method).toBe('GET');
-      expect(httpMock.open[0].request.url).toBe(beersModuleConfig.ENDPOINT.BEERS.GET.URL);
-      expect(httpMock.open[0].request.params.get(beersModuleConfig.ENDPOINT.BEERS.GET.QUERY_PARAMS.PAGE_NUMBER))
+      expect(httpMock.open[0].request.url).toBe(beerListModuleConfig.ENDPOINT.BEERS.GET.URL);
+      expect(httpMock.open[0].request.params.get(beerListModuleConfig.ENDPOINT.BEERS.GET.QUERY_PARAMS.PAGE_NUMBER))
         .toBe(mocks.beersPagination.pageNum.toString());
-      expect(httpMock.open[0].request.params.get(beersModuleConfig.ENDPOINT.BEERS.GET.QUERY_PARAMS.PAGE_SIZE))
+      expect(httpMock.open[0].request.params.get(beerListModuleConfig.ENDPOINT.BEERS.GET.QUERY_PARAMS.PAGE_SIZE))
         .toBe(mocks.beersPagination.pageSize.toString());
     });
   });
@@ -58,7 +58,7 @@ describe('BeersService', () => {
     mocks = {
       beersPagination: <Pagination>{
         pageNum: 1,
-        pageSize: BEERS_MODULE_CONSTANTS.ENDPOINT.BEERS.GET.DEFAULT_PAGE_SIZE,
+        pageSize: BEER_LIST_MODULE_CONSTANTS.ENDPOINT.BEERS.GET.DEFAULT_PAGE_SIZE,
         currentItems: 0,
         hasMoreItems: true
       },

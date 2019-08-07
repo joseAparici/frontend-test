@@ -7,8 +7,8 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {Store, StoreModule} from '@ngrx/store';
 import {Router} from '@angular/router';
 import {DrinkState} from '../../store';
-import {Pagination} from '../../../beers/store/state/beers.state-type';
-import {BEERS_MODULE_CONSTANTS} from '../../../beers/beers.module.config';
+import {Pagination} from '../../../list/store/state/beers.state-type';
+import {BEER_LIST_MODULE_CONSTANTS} from '../../../list/beer-list.module.config';
 import {of} from 'rxjs';
 import {BeerDetailService} from '../../services/beer-detail.service';
 import {BeerDetailServiceMock} from '../../services/beer-detail.service.mock';
@@ -84,7 +84,7 @@ describe('BeerDetailComponent', () => {
       beerId: 1,
       pagination: <Pagination>{
         pageNum: 1,
-        pageSize: BEERS_MODULE_CONSTANTS.ENDPOINT.BEERS.GET.DEFAULT_PAGE_SIZE,
+        pageSize: BEER_LIST_MODULE_CONSTANTS.ENDPOINT.BEERS.GET.DEFAULT_PAGE_SIZE,
         currentItems: 0,
         hasMoreItems: true
       },

@@ -1,11 +1,11 @@
 import {InjectionToken} from '@angular/core';
 import {APP_CONSTANTS} from '../app.config';
 
-export interface BeersModuleConfig {
+export interface BeerListModuleConfig {
   ENDPOINT: any;
 }
 
-export const BEERS_MODULE_CONSTANTS: BeersModuleConfig = {
+export const BEER_LIST_MODULE_CONSTANTS: BeerListModuleConfig = {
   ENDPOINT: {
     BEERS: {
       GET: {
@@ -20,4 +20,4 @@ export const BEERS_MODULE_CONSTANTS: BeersModuleConfig = {
   }
 };
 
-export let BEERS_MODULE_CONFIG = new InjectionToken<BeersModuleConfig>('beers.module.config');
+export let BEER_LIST_MODULE_CONFIG = new InjectionToken<BeerListModuleConfig>('beer-list.module.config');

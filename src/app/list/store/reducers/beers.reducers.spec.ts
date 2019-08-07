@@ -2,7 +2,7 @@ import {Pagination} from '../state/beers.state-type';
 import {FETCH_BEERS_RESPONSE, NEXT_BEERS_PAGE_REQUEST} from '../actions/beers.actions';
 import {GenericAction} from '../../../models';
 import {beersReducer} from './beers.reducer';
-import {BEERS_MODULE_CONSTANTS} from '../../beers.module.config';
+import {BEER_LIST_MODULE_CONSTANTS} from '../../beer-list.module.config';
 import any = jasmine.any;
 
 
@@ -40,14 +40,14 @@ describe('beersReducer', () => {
   function loadMocks() {
     const initialPagination = <Pagination>{
       pageNum: 1,
-      pageSize: BEERS_MODULE_CONSTANTS.ENDPOINT.BEERS.GET.DEFAULT_PAGE_SIZE,
+      pageSize: BEER_LIST_MODULE_CONSTANTS.ENDPOINT.BEERS.GET.DEFAULT_PAGE_SIZE,
       currentItems: 0,
       hasMoreItems: true
     };
 
     const secondPagePagination = <Pagination>{
       pageNum: 2,
-      pageSize: BEERS_MODULE_CONSTANTS.ENDPOINT.BEERS.GET.DEFAULT_PAGE_SIZE,
+      pageSize: BEER_LIST_MODULE_CONSTANTS.ENDPOINT.BEERS.GET.DEFAULT_PAGE_SIZE,
       currentItems: 0,
       hasMoreItems: true
     };
