@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {BEER_LIST_MODULE_CONFIG, BeerListModuleConfig} from '../beer-list.module.config';
-import {Pagination} from '../store/state/beers.state-type';
+import {Pagination} from '../../../store/state/beers.state-type';
 
 @Injectable({
   providedIn: 'root'

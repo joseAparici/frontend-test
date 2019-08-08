@@ -2,11 +2,11 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {BeerListComponent} from './beer-list.component';
 import {Store, StoreModule} from '@ngrx/store';
-import {DrinksState} from '../../store';
+import {DrinksState} from '../../../../store';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Router} from '@angular/router';
-import {nextBeersPageRequest} from '../../store/actions/beers.actions';
-import {Pagination} from '../../store/state/beers.state-type';
+import {nextBeersPageRequest} from '../../../../store/actions/beers.actions';
+import {Pagination} from '../../../../store/state/beers.state-type';
 import {BEER_LIST_MODULE_CONSTANTS} from '../../beer-list.module.config';
 import {of} from 'rxjs';
 

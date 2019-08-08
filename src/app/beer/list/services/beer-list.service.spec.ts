@@ -3,7 +3,7 @@ import {BeerListService} from './beer-list.service';
 import {BEER_LIST_MODULE_CONFIG, BEER_LIST_MODULE_CONSTANTS, BeerListModuleConfig} from '../beer-list.module.config';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {Observable} from 'rxjs';
-import {Pagination} from '../store/state/beers.state-type';
+import {Pagination} from '../../../store/state/beers.state-type';
 
 describe('BeerListService', () => {
   let beerListService: BeerListService;

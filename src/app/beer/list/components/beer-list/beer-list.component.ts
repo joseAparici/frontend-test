@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
-import {DrinksState} from '../../store';
+import {DrinksState} from '../../../../store';
 import {Observable, Subscription} from 'rxjs';
-import {getBeersPagination, getBeersSelector} from '../../store/selectors/beers.selectors';
-import {fetchBeersListRequest, nextBeersPageRequest} from '../../store/actions/beers.actions';
+import {getBeersPagination, getBeersSelector} from '../../../../store/selectors/beers.selectors';
+import {fetchBeersListRequest, nextBeersPageRequest} from '../../../../store/actions/beers.actions';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Pagination} from '../../store/state/beers.state-type';
+import {Pagination} from '../../../../store/state/beers.state-type';
 
 @Component({
   selector: 'app-beer-list',
