@@ -17,11 +17,23 @@ export class BeerListComponent implements OnInit, OnDestroy {
   public beers$: Observable<any>;
   private subscription = new Subscription();
 
+  /**
+   * Represents a beer list component
+   * @class
+   * @constructor
+   * @property {Store<DrinksState>} store
+   * @property {Router} router
+   * @property {ActivatedRoute} route
+   */
   constructor(private store: Store<DrinksState>,
               private router: Router,
               private route: ActivatedRoute) {
   }
 
+  /**
+   * Subscribes to next beer list page,  if there are more pages, dispatch a request with the next page
+   * Retrieve beer list as observable from store
+   */
   ngOnInit() {
     this.subscription.add(
       this.store.pipe(select(getBeersPagination)).subscribe((pagination: Pagination) => {
@@ -34,14 +46,24 @@ export class BeerListComponent implements OnInit, OnDestroy {
     this.beers$ = this.store.pipe(select(getBeersSelector));
   }
 
+  /**
+   * Navigates to detail page using the beer id
+   * @param {number} beerId
+   */
   goToDetail(beerId: number) {
     this.router.navigate([beerId], {relativeTo: this.route});
   }
 
+  /**
+   * Dispatch a next page request when user scrolls
+   */
   onScroll() {
     this.store.dispatch(nextBeersPageRequest());
   }
 
+  /**
+   * Unsubscribe to all subscriptions when component is destroyed
+   */
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

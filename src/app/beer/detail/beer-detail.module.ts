@@ -7,6 +7,11 @@ import {HttpClientModule} from '@angular/common/http';
 import {BEER_DETAIL_MODULE_CONFIG, BEER_DETAIL_MODULE_CONSTANTS} from './beer-detail.module.config';
 import {BeerDetailComponent} from './components/beer-detail/beer-detail.component';
 
+/**
+ * Represent beer detail module
+ * @module BeerDetailModule
+ */
+
 @NgModule({
   imports: [
     CommonModule,

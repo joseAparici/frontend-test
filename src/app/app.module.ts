@@ -10,6 +10,10 @@ import {EffectsModule} from '@ngrx/effects';
 import {BeerDetailModule} from './beer/detail/beer-detail.module';
 import {APP_CONSTANTS, APP_MODULE_CONFIG} from './app.config';
 
+/**
+ * Represents app module
+ * @module AppModule
+ */
 
 @NgModule({
   declarations: [

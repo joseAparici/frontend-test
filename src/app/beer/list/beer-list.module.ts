@@ -12,6 +12,11 @@ import {BeerListService} from './services/beer-list.service';
 import {BEER_LIST_MODULE_CONFIG, BEER_LIST_MODULE_CONSTANTS} from './beer-list.module.config';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
+/**
+ * Represents beer list module
+ * @module BeerListModule
+ */
+
 @NgModule({
   imports: [
     CommonModule,

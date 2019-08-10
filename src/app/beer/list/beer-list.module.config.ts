@@ -5,6 +5,11 @@ export interface BeerListModuleConfig {
   ENDPOINT: any;
 }
 
+/**
+ * The config object associated to beer list module
+ * @constant
+ * @type {BeerListModuleConfig}
+ */
 export const BEER_LIST_MODULE_CONSTANTS: BeerListModuleConfig = {
   ENDPOINT: {
     BEERS: {
@@ -19,5 +24,10 @@ export const BEER_LIST_MODULE_CONSTANTS: BeerListModuleConfig = {
     }
   }
 };
+
+/**
+ * The injection token to use on beer list module
+ * @type {InjectionToken<BeerListModuleConfig>}
+ */
 
 export let BEER_LIST_MODULE_CONFIG = new InjectionToken<BeerListModuleConfig>('beer-list.module.config');

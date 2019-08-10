@@ -81,7 +81,7 @@ describe('BeerDetailComponent', () => {
 
   describe('calculateGravityDifference', () => {
     it('should call to calculateDifference method service', () => {
-      component.calculateGravityDifference(any, any);
+      component.calculateGravityDifference(mocks.original_gravity, mocks.final_gravity);
       expect(spies.beerDetailService.calculateDifference).toHaveBeenCalled();
       expect(component.gravityDifference).toEqual(mocks.gravityDifference);
     });
@@ -91,6 +91,8 @@ describe('BeerDetailComponent', () => {
   function loadMocks() {
     mocks = {
       beerId: 1,
+      original_gravity: 4,
+      final_gravity: 2,
       gravityDifference: 2
     };
   }
