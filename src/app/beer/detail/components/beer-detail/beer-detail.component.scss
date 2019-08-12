@@ -1,18 +1,83 @@
 $height: 300px;
-
+$padding: 5%;
+$padding-small: $padding / 2;
+$margin: $padding;
+$color-background: #ddd;
+$color-container: white;
+$color-primary: #4CAF50;
 
 :host {
-  .beerDetail {
-    height: $height;
-    margin: 15px;
-    h4 {
-      margin-bottom: 0;
+  .container {
+    padding: $padding;
+    background-color: $color-container;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    .back-button {
+      border-radius: 50%;
+      background-color: $color-background;
+      text-decoration: none;
+      display: inline-block;
+      padding: 8px 16px;
+      cursor: pointer;
+      &:hover {
+        background-color: $color-primary;
+        color: black;
+      }
     }
-    h4, p {
-      text-align: center;
+
+    .container-image {
+      margin: $margin;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      .main-image {
+        width: 300px;
+        height: 300px;
+        align-self: center;
+        text-align:center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          max-width: 100%;
+          max-height: 100%;
+          width: auto;
+          height: auto;
+        }
+      }
     }
-    img {
-      height: 50%;
+
+    .container-gravity {
+      padding-top: 40px;
+
+      button {
+        color: white;
+        padding: 14px;
+        cursor: pointer;
+        background-color: $color-primary;
+      }
+      span {
+        margin-left: 20px;
+      }
+    }
+
+    .detail {
+      padding: $padding-small;
+      width: 30%;
+
+      .detail-short-description {
+        margin-top: 2em;
+      }
+
+      .detail-long-description {
+        margin-top: 3em;
+        font-size: 0.8rem;
+      }
     }
   }
 

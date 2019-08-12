@@ -1,8 +1,8 @@
-<div class="beerContainer"
+<div class="container"
      infiniteScroll
      (scrolled)="onScroll()">
-  <div class="beer"
-       *ngFor="let beer of (beers$ | async)">
+  <div class="card"
+  *ngFor="let beer of (beers$ | async)">
     <h4>
       {{beer.name}}
     </h4>
@@ -10,6 +10,8 @@
       {{beer.tagline}}
     </p>
     <img src="{{beer.image_url}}">
-    <button (click)="goToDetail(beer.id)">Go to detail</button>
+    <div class="card-overlay">
+      <button (click)="goToDetail(beer.id)"><em>... more</em></button>
+    </div>
   </div>
 </div>

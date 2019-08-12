@@ -1,21 +1,35 @@
 <div *ngIf="beer$ |async as beer"
-  class="beerDetail">
-  <button (click)="goBack()">Go back</button>
-  <h4>{{beer.name}}</h4>
-  <p>{{beer.description}}</p>
-  <p>First brewed: {{beer.first_brewed}}</p>
-  <img src="{{beer.image_url}}">
-  <h2>Food pairing:</h2>
-  <ul>
-    <li *ngFor="let food of beer.food_pairing">
-      {{ food }}
-    </li>
-  </ul>
-  <p>Abv: {{beer.abv}}</p>
-  <p>Ibu: {{beer.ibu}}</p>
-  <p>Contributed by: {{beer.contributed_by}}</p>
+     class="container">
   <div>
-    <button (click)="calculateGravityDifference(beer.target_og, beer.target_fg)">Calculate difference</button>
-    <span *ngIf="gravityDifference">Gravity difference: {{gravityDifference}}</span>
+    <a class="back-button" (click)="goBack()">&#8249;</a>
+  </div>
+  <div class="container-image">
+    <div class="main-image">
+      <img src="{{beer.image_url}}">
+    </div>
+    <div class="container-gravity">
+      <button (click)="calculateGravityDifference(beer.target_og, beer.target_fg)">Calculate difference</button>
+      <span *ngIf="gravityDifference">Gravity difference: {{gravityDifference}}</span>
+    </div>
+  </div>
+  <div class="detail">
+    <h1 class="detail-name">{{beer.name}}</h1>
+    <p class="detail-short-description">
+      {{beer.description}}
+    </p>
+    <details>
+      <summary>Food pairing:</summary>
+      <ul>
+        <li *ngFor="let food of beer.food_pairing">
+          {{ food }}
+        </li>
+      </ul>
+    </details>
+    <div class="detail-long-description">
+      <p>First brewed: {{beer.first_brewed}}</p>
+      <p>Abv: {{beer.abv}}</p>
+      <p>Ibu: {{beer.ibu}}</p>
+      <p>Contributed by: {{beer.contributed_by}}</p>
+    </div>
   </div>
 </div>
